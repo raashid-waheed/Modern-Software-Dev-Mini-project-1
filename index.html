@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant Menu</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/fuzzysort@1.2.0/dist/fuzzysort.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Restaurant Menu</h1>
+    <hr>
+    <h2>Search the Menu</h2>
+    <input type="text" v-model="search" placeholder="Search for meal combination">
+    <hr>
+    <!-- Display the menu -->
+    <div class="menu">
+      <div v-for="item in filteredMenu" :key="item.id" class="menu-item">
+        <h4>{{ item.name }}</h4>
+        <p>Category: {{ item.category }}</p>
+        <p>Price: ${{ item.price }}</p>
+        <p><img :src="item.image" :alt="item.name" width="200" height="150"></p>
+        <button @click="addToCart(item)">Add to Cart</button>
+      </div>
+    </div>
+
+
+    <!-- Display the cart -->
+    <div class="cart">
+      <h2>Your Cart</h2>
+      <ul>
+        <li v-for="cartItem in cart" :key="cartItem.id">
+          {{ cartItem.name }} - ${{ cartItem.price }}
+        </li>
+      </ul>
+      <p>Total: ${{ total }}</p>
+      <button @click="placeOrder">Place Order</button>
+      <hr>
+      <button @click="resetOrder">Reset Order</button>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
+
+
